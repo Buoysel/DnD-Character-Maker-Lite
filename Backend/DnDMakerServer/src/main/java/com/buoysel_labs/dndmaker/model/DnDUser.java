@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -30,7 +31,7 @@ public class DnDUser {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy="creator")
+	@OneToMany(mappedBy="creator", fetch=FetchType.LAZY)
 	private List<DnDCharacter> characters;
 	
 	public int getUserID() {
@@ -66,7 +67,7 @@ public class DnDUser {
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", character=" + characters + "]";
+				+ "]";
 	}
 	
 	

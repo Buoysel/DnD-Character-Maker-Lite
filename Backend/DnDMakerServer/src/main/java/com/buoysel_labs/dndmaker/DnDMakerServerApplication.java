@@ -22,6 +22,7 @@ public class DnDMakerServerApplication {
 		 * The app returns a Character, who gets its User, who
 		 * is aware of its characters, who each know their user,
 		 * and so on.
+		 * 
 		 */
 		
 	}

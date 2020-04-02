@@ -2,7 +2,9 @@ package com.buoysel_labs.dndmaker.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,27 +17,19 @@ public class UserController {
 	@Autowired
 	UserRepo userRepo;
 	
-	
-	public void SubmitSampleUser(DnDUser user) {
-		userRepo.save(user);
-	}
-	
 	@PostMapping(path="/user",consumes= {"application/json"})
 	public DnDUser addUser(@RequestBody DnDUser user) {
-		userRepo.save(user);
-		return user;
+		return userRepo.save(user);
 	}
 	
-//	@GetMapping(path="/user")
-//	public DnDUser getUser() {
-//		DnDUser buoysel = new DnDUser();
-//		buoysel.setUsername("buoysel");
-//		buoysel.setEmail("firstone1993@msn.com");
-//		buoysel.setPassword("mypass");
-//
-//		userRepo.save(buoysel);
-//		return buoysel;
-//	}
+	@GetMapping(path="/user/{uid}")
+	public DnDUser getUser(@PathVariable("uid") int uid) {
+		return userRepo.findByUserID(uid);
+	}
 	
+	@PutMapping(path="/user/{uid}")
+	public DnDUser updateUser(@RequestBody DnDUser user) {
+		return userRepo.save(user);
+	}
 	
 }

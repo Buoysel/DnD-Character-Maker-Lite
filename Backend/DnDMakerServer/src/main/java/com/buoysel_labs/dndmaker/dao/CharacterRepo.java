@@ -6,4 +6,6 @@ import com.buoysel_labs.dndmaker.model.DnDCharacter;
 
 public interface CharacterRepo extends JpaRepository<DnDCharacter, Integer>{
 
+	DnDCharacter findByCharID(int cid);
+
 }

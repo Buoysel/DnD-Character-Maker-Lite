@@ -8,12 +8,12 @@
 
 {
     "creator" : {
-        "username":"Buoysel",
+        "username":"Buoysel"
     },
     "name" : "Bo'Rung",
     "level": 1,
     "race" : "Orc",
-    "class" : "Monk",
+    "charClass" : "Monk",
     "background" : "Pirate",
     "alignment" : "Lawful Neutral",
     "hitpoints" : 11,

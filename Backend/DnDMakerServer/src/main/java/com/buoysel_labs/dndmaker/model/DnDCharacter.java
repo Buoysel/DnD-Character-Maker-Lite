@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -24,7 +25,7 @@ public class DnDCharacter {
 	@Column(name="char_id")
 	private int charID;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private DnDUser creator;
 	
 	private Date datecreated;
@@ -52,8 +53,8 @@ public class DnDCharacter {
 	public void setCharID(int charID) {
 		this.charID = charID;
 	}
-	public DnDUser getCreator() {
-		return creator;
+	public int getCreator() {
+		return creator.getUserID();
 	}
 	public void setCreator(DnDUser creator) {
 		this.creator = creator;
@@ -145,7 +146,7 @@ public class DnDCharacter {
 	}
 	@Override
 	public String toString() {
-		return "Character [charID=" + charID + ", creator=" + creator + ", datecreated=" + datecreated + ", name="
+		return "Character [charID=" + charID + ", creator=" + creator.getUserID() + ": " + creator.getUsername() + ", datecreated=" + datecreated + ", name="
 				+ name + ", level=" + level + ", charClass=" + charClass + ", background=" + background + ", alignment="
 				+ alignment + ", hitpoints=" + hitpoints + ", strength=" + strength + ", dexterity=" + dexterity
 				+ ", constitution=" + constitution + ", intelligence=" + intelligence + ", wisdom=" + wisdom
