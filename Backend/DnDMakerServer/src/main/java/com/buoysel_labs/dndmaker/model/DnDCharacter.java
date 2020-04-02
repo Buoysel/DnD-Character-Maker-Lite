@@ -1,30 +1,38 @@
 package com.buoysel_labs.dndmaker.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Cacheable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
+@Table(name="characters")
 @Cacheable
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
-public class Character {
+public class DnDCharacter {
 	
 	@Id
+	@GeneratedValue
+	@Column(name="char_id")
 	private int charID;
 	
 	@ManyToOne
-	private User creator;
+	private DnDUser creator;
 	
 	private Date datecreated;
 	
 	private String name;
 	private int level;
+	private String race;
+	@Column(name="class")
 	private String charClass;
 	private String background;
 	private String alignment;
@@ -44,10 +52,10 @@ public class Character {
 	public void setCharID(int charID) {
 		this.charID = charID;
 	}
-	public User getCreator() {
+	public DnDUser getCreator() {
 		return creator;
 	}
-	public void setCreator(User creator) {
+	public void setCreator(DnDUser creator) {
 		this.creator = creator;
 	}
 	public Date getDatecreated() {
@@ -68,6 +76,13 @@ public class Character {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+	public String getRace() {
+		return race;
+	}
+	public void setRace(String race) {
+		this.race = race;
+	}
+
 	public String getCharClass() {
 		return charClass;
 	}

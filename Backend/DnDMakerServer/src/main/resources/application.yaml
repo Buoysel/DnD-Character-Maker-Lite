@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dnd_char_maker_lite
+    username: dndUser
+    password: dndPass
+  jpa:
+    hibernate.ddl-auto: create
+    generate-ddl: true
+    show-sql: true

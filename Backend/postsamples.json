@@ -1,0 +1,26 @@
+{
+	"username":"Buoysel",
+	"email":"firstone1993@msn.com",
+	"password":"mypass"
+}
+
+,
+
+{
+    "creator" : {
+        "username":"Buoysel",
+    },
+    "name" : "Bo'Rung",
+    "level": 1,
+    "race" : "Orc",
+    "class" : "Monk",
+    "background" : "Pirate",
+    "alignment" : "Lawful Neutral",
+    "hitpoints" : 11,
+    "strength" : 15,
+    "dexterity" : 16,
+    "constitution" : 17,
+    "intelligence" : 10,
+    "wisdom" : 16,
+    "charisma" : 9 
+}
