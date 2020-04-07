@@ -4,11 +4,11 @@
 	"password":"mypass"
 }
 
-,
+,   
 
 {
     "creator" : {
-        "username":"Buoysel"
+        "userID" : 1
     },
     "name" : "Bo'Rung",
     "level": 1,
