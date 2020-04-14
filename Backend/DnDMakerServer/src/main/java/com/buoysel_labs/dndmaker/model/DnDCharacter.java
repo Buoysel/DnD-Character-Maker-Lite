@@ -146,7 +146,7 @@ public class DnDCharacter {
 	}
 	@Override
 	public String toString() {
-		return "Character [charID=" + charID + ", creator=" + creator.getUserID() + ": " + creator.getUsername() + ", datecreated=" + datecreated + ", name="
+		return "Character [charID=" + charID + ", creator=" + creator.getUserID() + ", datecreated=" + datecreated + ", name="
 				+ name + ", level=" + level + ", charClass=" + charClass + ", background=" + background + ", alignment="
 				+ alignment + ", hitpoints=" + hitpoints + ", strength=" + strength + ", dexterity=" + dexterity
 				+ ", constitution=" + constitution + ", intelligence=" + intelligence + ", wisdom=" + wisdom

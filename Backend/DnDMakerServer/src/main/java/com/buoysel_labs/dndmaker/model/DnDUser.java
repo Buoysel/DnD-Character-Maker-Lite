@@ -31,7 +31,7 @@ public class DnDUser {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy="creator", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="creator", fetch=FetchType.EAGER)
 	private List<DnDCharacter> characters;
 	
 	public int getUserID() {
@@ -58,16 +58,16 @@ public class DnDUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public List<DnDCharacter> getCharacter() {
+	public List<DnDCharacter> getCharacters() {
 		return characters;
 	}
-	public void setCharacter(List<DnDCharacter> character) {
+	public void setCharacters(List<DnDCharacter> character) {
 		this.characters = character;
 	}
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", username=" + username + ", email=" + email + ", password=" + password
-				+ "]";
+				+ ", characters=" + characters + "]";
 	}
 	
 	
