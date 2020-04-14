@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DnDUser } from '../../model/DnDUser';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -38,9 +40,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(userData) {
-    let user:DnDUser = userData as DnDUser;
+    this.userService.getUserByLogin(userData as DnDUser)
+      .subscribe((foundUser: DnDUser) => {
+        console.log("Found User: " + JSON.stringify(foundUser)); 
+        this.userService.setCurrentUser(foundUser);
 
-    console.log(user);
-
+        //this.router.navigate(['/characters']);  -- Route to characters page after successfully logging in.
+      });
   }
 }

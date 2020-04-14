@@ -1,0 +1,75 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="registrationForm" (ngSubmit)="register(registrationForm.value)">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" formControlName="username">
+                <div *ngIf="username.touched">
+                    <small *ngIf="username.errors?.required" class="text-danger">
+                        Username is required
+                    </small>
+                    <small *ngIf="username.errors?.minlength" class="text-danger">
+                        Username must be at least 3 characters long.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="text" class="form-control" formControlName="email">
+                <div *ngIf="email.touched">
+                    <small *ngIf="email.errors?.required" class="text-danger">
+                        E-mail is required
+                    </small>
+                    <small *ngIf="email.errors?.email" class="text-danger">
+                        Not a valid email.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" formControlName="password">
+                <div *ngIf="password.touched">
+                    <small *ngIf="password.errors?.required" class="text-danger">
+                        Password is required
+                    </small>
+                    <small *ngIf="password.errors?.minlength" class="text-danger">
+                        Password must be at least 6 characters
+                    </small>
+                    <small *ngIf="password.errors?.maxlength" class="text-danger">
+                        Password is too long (24 characters)
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" formControlName="confirmPassword">
+                <div *ngIf="confirmPassword.touched">
+                    <small *ngIf="confirmPassword.errors?.required" class="text-danger">
+                        Please confirm your password
+                    </small>
+                    <small *ngIf="registrationForm.errors?.misMatch" class="text-danger">
+                        Passwords must match.
+                    </small>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2"></div>
+
+                <div class="col-8" style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.valid">Create Account</button>
+
+                    <br>
+
+                    <p>Already have an account? <a routerLink="/login">Sign in</a> here</p>
+
+                </div>
+
+                <div class="col-2"></div>
+            </div>
+        </form>
+    </div>
+</div>
