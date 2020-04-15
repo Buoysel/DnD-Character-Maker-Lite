@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DnDUser } from '../../model/DnDUser';
 import { UserService } from '../../services/user/user.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import { UserService } from '../../services/user/user.service';
 export class LoginComponent implements OnInit {
 
   private loginForm: FormGroup;
-  private loginAttempted: boolean;
+  private loginAttempted: boolean = false;
+  private errorMessage: string = '';
 
   get username() {
     return this.loginForm.get('username');
@@ -40,12 +42,30 @@ export class LoginComponent implements OnInit {
   }
 
   login(userData) {
+
+    this.loginAttempted = false;  // Hide the error message.
+
     this.userService.getUserByLogin(userData as DnDUser)
-      .subscribe((foundUser: DnDUser) => {
-        console.log("Found User: " + JSON.stringify(foundUser)); 
-        this.userService.setCurrentUser(foundUser);
+      .subscribe((resp: HttpResponse<DnDUser>) => { 
+        this.userService.setCurrentUser(resp.body as DnDUser);
+        console.log(this.userService.getCurrentUser());
 
         //this.router.navigate(['/characters']);  -- Route to characters page after successfully logging in.
+      },
+      (error: HttpResponse<DnDUser>) => {
+        switch(error.status) {
+          case 401:
+            this.errorMessage = "Incorrect username/password combination";
+            break;
+          case 404:
+            this.errorMessage = "User not found.";
+            break;
+          default:
+            this.errorMessage = "Something went wrong. Please try again later.";
+            break;
+        }
+
+        this.loginAttempted = true;
       });
   }
 }

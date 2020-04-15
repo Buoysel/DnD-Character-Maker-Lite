@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { DnDUser } from '../../model/DnDUser';
@@ -22,28 +22,31 @@ export class UserService {
   }
 
   httpOptions = {
-    headers: new HttpHeaders({'content-type': 'application/json'})
+    headers: new HttpHeaders({'content-type': 'application/json'}),
+    observe: 'response'
   }
 
   constructor(private http: HttpClient) { }
 
 
   /** Post new user on the database */
-  public addNewUser(newUser: DnDUser):Observable<DnDUser> {
+  public addNewUser(newUser: DnDUser):Observable<HttpResponse<DnDUser>> {
     const url = `${this.usersUrl}/newUser`;
 
-    return this.http.post<DnDUser>(url, newUser, this.httpOptions);
+  return this.http.post<DnDUser>(url, newUser,  {
+    headers: new HttpHeaders({'content-type': 'application/json'}),
+    observe: 'response'
+  });
 
   }
 
   /** Get users from the server */
-  public getUserByLogin(loginUser: DnDUser): Observable<DnDUser> {
+  public getUserByLogin(loginUser: DnDUser): Observable<HttpResponse<DnDUser>> {
 
     const url = `${this.usersUrl}/uname=${loginUser.username}&upass=${loginUser.password}`;
-    console.log(url);
-    return this.http.get<DnDUser>(url, this.httpOptions).pipe(
-      tap((foundUser:DnDUser) => console.log(`fetched ` + JSON.stringify(foundUser))),
-      catchError(this.handleError<DnDUser>(`getUser username=${loginUser.getUsername} failed`))
+    
+    return this.http.get<DnDUser>(url, {observe: 'response'}).pipe(
+      catchError(this.handleError)
     );
   }
 

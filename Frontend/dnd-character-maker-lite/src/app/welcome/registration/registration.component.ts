@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {DnDUser} from '../../model/DnDUser';
 import {UserService} from '../../services/user/user.service';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -13,7 +14,12 @@ import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.va
 export class RegistrationComponent implements OnInit {
 
   private registrationForm: FormGroup;
-  private registrationAttempted: boolean;
+
+  private errorMessage: string;
+  private registrationFailed: boolean;
+
+  private successMessage: string;
+  private registrationSucceeded: boolean;
 
   get username() {
     return this.registrationForm.get('username');
@@ -59,6 +65,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(userData) {
+    
+    this.registrationFailed = false;
+    this.registrationSucceeded = false;
   
     let newUser:DnDUser = new DnDUser();
     newUser.setUsername(userData.username);
@@ -67,8 +76,20 @@ export class RegistrationComponent implements OnInit {
 
 
     this.userService.addNewUser(newUser)
-      .subscribe(_ => {
-        console.log("User created!... I think (Please figure out how to get HTTP response codes...");
+      .subscribe((resp: HttpResponse<DnDUser>) => {
+        this.successMessage = `Account created successfully! Please return to the login screen.`
+        this.registrationSucceeded = true;
+      },
+      (error: HttpResponse<DnDUser>) => {
+        switch(error.status) {
+          case 409:
+            this.errorMessage = "User already exists";
+            break;
+          default:
+            this.errorMessage = "Something went wrong. Please try again later";
+            break;
+        }
+        this.registrationFailed = true;
       });
   }
 

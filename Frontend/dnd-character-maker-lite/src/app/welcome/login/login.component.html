@@ -11,17 +11,20 @@
             </div>
           </div>
           <div class="form-group">
-              <label for="username">Password</label>
+              <label for="password">Password</label>
               <input type="password" class="form-control" formControlName="password">
               <div>
                 <small *ngIf="password.touched && password.errors?.required" class="text-danger">
-                    Please enter your username.
+                    Please enter your password.
                 </small>
-
+            </div>
+          </div>
+          <div class ="row">
+            <div class="col">
                 <!-- Add a condition for incorrect username/password combination -->
-                <small *ngIf="loginAttempted" class="text-danger">
-                    Wrong Username and Password combination. Please try again.
-                </small>
+                <div *ngIf="loginAttempted" class="alert alert-danger" role="alert">
+                  {{errorMessage}}
+                </div>
             </div>
           </div>
           <div class="row">

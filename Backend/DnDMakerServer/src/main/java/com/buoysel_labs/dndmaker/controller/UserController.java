@@ -1,5 +1,7 @@
 package com.buoysel_labs.dndmaker.controller;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +26,13 @@ public class UserController {
 	CharacterRepo charRepo;
 	
 	@PostMapping(path="/user/newUser",consumes= {"application/json"})
-	public DnDUser addUser(@RequestBody DnDUser user) {
-		return userRepo.save(user);
+	public ResponseEntity<DnDUser> addUser(@RequestBody DnDUser user) {
+		try {
+			return new ResponseEntity(userRepo.save(user), HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity(HttpStatus.CONFLICT);
+		}
 	}
 	
 	@GetMapping(path="/user/id={uid}")

@@ -56,6 +56,19 @@
                 </div>
             </div>
 
+            <div class ="row">
+                <div class="col">
+                    <!-- Add a condition for incorrect username/password combination -->
+                    <div *ngIf="registrationFailed" class="alert alert-danger" role="alert">
+                      {{errorMessage}}
+                    </div>
+
+                    <div *ngIf="registrationSucceeded" class="alert alert-success" role="alert">
+                      {{successMessage}}
+                    </div>
+                </div>
+              </div>
+
             <div class="row">
                 <div class="col-2"></div>
 
