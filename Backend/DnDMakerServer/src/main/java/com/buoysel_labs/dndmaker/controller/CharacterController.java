@@ -3,6 +3,8 @@ package com.buoysel_labs.dndmaker.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +28,17 @@ public class CharacterController {
 	UserRepo userRepo;
 	
 	@GetMapping(path="/character/{cid}")
-	public DnDCharacter getDnDChar(@PathVariable("cid") int cid) {
-		return charRepo.findByCharID(cid);
+	public ResponseEntity<DnDCharacter> getDnDChar(@PathVariable("cid") int cid) {
+		
+		DnDCharacter foundChar = charRepo.findByCharID(cid);
+		System.out.println(foundChar);
+		
+		if (foundChar != null) {
+			return new ResponseEntity<>(foundChar, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
 	}
 	
 	@PostMapping(path="/character", consumes= {"application/json"})

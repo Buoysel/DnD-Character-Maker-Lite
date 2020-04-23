@@ -8,12 +8,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './welcome/login/login.component';
 import { RegistrationComponent } from './welcome/registration/registration.component';
+import { AllCharactersComponent } from './Dashboard/all-characters/all-characters.component';
+import { CharacterCardComponent } from './Dashboard/all-characters/character-card/character-card.component';
+import { ViewCharacterComponent } from './Character/view-character/view-character.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    AllCharactersComponent,
+    CharacterCardComponent,
+    ViewCharacterComponent
   ],
   imports: [
     BrowserModule,

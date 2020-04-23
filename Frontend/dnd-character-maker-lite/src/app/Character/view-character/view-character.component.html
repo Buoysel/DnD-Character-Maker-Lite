@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col">
+        <h2>{{ character.name }}, {{character.charClass }}</h2>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-6">
+        <h4>Stats</h4>
+
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Level: {{ character.level }}</li>
+              <li class="list-group-item">HP: {{ character.hitpoints }}</li>
+              <li class="list-group-item">STR: {{ character.strength }}</li>
+              <li class="list-group-item">DEX: {{ character.dexterity }}</li>
+              <li class="list-group-item">CON: {{ character.constitution }}</li>
+              <li class="list-group-item">INT: {{ character.intelligence }}</li>
+              <li class="list-group-item">WIS: {{ character.wisdom }}</li>
+              <li class="list-group-item">CHA: {{ character.charisma }}</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="col-6">
+        <h4>Biography</h4>
+
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Race: {{ character.race }}</li>
+              <li class="list-group-item">Background: {{ character.background }}</li>
+              <li class="list-group-item">Alignment: {{ character.alignment }}</li>
+            </ul>
+        </div>
+    </div>
+
+</div>

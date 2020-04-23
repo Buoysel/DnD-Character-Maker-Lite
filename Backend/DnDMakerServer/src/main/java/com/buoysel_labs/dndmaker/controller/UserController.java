@@ -1,7 +1,5 @@
 package com.buoysel_labs.dndmaker.controller;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.buoysel_labs.dndmaker.AES;
 import com.buoysel_labs.dndmaker.dao.CharacterRepo;
 import com.buoysel_labs.dndmaker.dao.UserRepo;
 import com.buoysel_labs.dndmaker.model.DnDUser;
@@ -27,6 +26,10 @@ public class UserController {
 	
 	@PostMapping(path="/user/newUser",consumes= {"application/json"})
 	public ResponseEntity<DnDUser> addUser(@RequestBody DnDUser user) {
+		
+		String encryptedPassword = AES.encrypt(user.getPassword());
+		user.setPassword(encryptedPassword);
+		
 		try {
 			return new ResponseEntity(userRepo.save(user), HttpStatus.OK);
 
@@ -47,7 +50,9 @@ public class UserController {
 		
 		if (login != null) {
 			
-			if (login.getPassword().equals(upass)) {
+			String decryptedPassword = AES.decrypt(login.getPassword());
+			
+			if (decryptedPassword.equals(upass)) {
 				
 				login.setPassword("");
 				

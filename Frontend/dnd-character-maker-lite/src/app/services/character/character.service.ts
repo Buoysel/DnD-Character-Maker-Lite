@@ -2,54 +2,31 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-
-import { DnDUser } from '../../model/DnDUser';
-import { DnDCharacter } from '../../model/DnDCharacter';
+import { DnDCharacter } from 'src/app/model/DnDCharacter';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class CharacterService {
 
-  private usersUrl:string = 'http://localhost:8080/user';
-
-  private currentUser:DnDUser;
-  public getCurrentUser():DnDUser {
-    return this.currentUser;
-  }
-  public setCurrentUser(user:DnDUser) {
-    this.currentUser = user;
-  }
+  private charUrl:string = 'http://localhost:8080/character'
 
   httpOptions = {
     headers: new HttpHeaders({'content-type': 'application/json'}),
     observe: 'response'
   }
-
-  constructor(private http: HttpClient) { }
-
-
-  /** Post new user on the database */
-  public addNewUser(newUser: DnDUser):Observable<HttpResponse<DnDUser>> {
-    const url = `${this.usersUrl}/newUser`;
-
-  return this.http.post<DnDUser>(url, newUser,  {
-    headers: new HttpHeaders({'content-type': 'application/json'}),
-    observe: 'response'
-  });
-
-  }
-
-  /** Get users from the server */
-  public getUserByLogin(loginUser: DnDUser): Observable<HttpResponse<DnDUser>> {
-
-    const url = `${this.usersUrl}/uname=${loginUser.username}&upass=${loginUser.password}`;
     
-    return this.http.get<DnDUser>(url, {observe: 'response'});
+  constructor(private http: HttpClient) { 
+
+  }
+
+  /** Get Character by ID */
+  public getCharacterById(charID: number): Observable<HttpResponse<DnDCharacter>> {
+    const url = `${this.charUrl}/${charID}`;
+    return  this.http.get<DnDCharacter>(url, {observe: 'response'});;
   }
 
 
-  
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -69,3 +46,6 @@ export class UserService {
     };
   }
 }
+
+
+

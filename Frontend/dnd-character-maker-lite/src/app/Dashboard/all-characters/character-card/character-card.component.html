@@ -1,0 +1,14 @@
+<div class="col-sm-6">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body" style="text-align: center;">
+        <h5 class="card-title"> {{ character.name }}</h5>
+        <p class="card-text">Class: {{ character.charClass }}, Level: {{character.level}}</p>
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a (click)="onEdit(character)" style="color: white;" class="btn btn-success">Edit</a>
+            <a (click)="onView(character)" style="color: white;" class="btn btn-primary">View</a>
+            <a (click)="onDelete(character)" style="color: white;" class="btn btn-danger">Delete</a>
+        </div>
+        </div>
+    </div>
+</div>

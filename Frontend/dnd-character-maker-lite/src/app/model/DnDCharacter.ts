@@ -2,24 +2,24 @@ import { DnDUser } from './DnDUser';
 
 export class DnDCharacter {
 
-    private charID: number;
-    private creator: DnDUser;
-    private datecreated: Date;
+     charID: number;
+     creator: DnDUser;
+     datecreated: Date;
 
-    private name: string;
-    private level: number;
-    private race: string;
-    private charClass: string;
-    private background: string;
-    private alignment: string
+     name: string;
+     level: number;
+     race: string;
+     charClass: string;
+     background: string;
+     alignment: string
 
-    private hitpoints: number;
-    private strength: number;
-    private dexterity: number;
-    private constitution: number;
-    private intelligence: number;
-    private wisdom: number;
-    private charisma: number;
+     hitpoints: number;
+     strength: number;
+     dexterity: number;
+     constitution: number;
+     intelligence: number;
+     wisdom: number;
+     charisma: number;
     
     constructor() {
 

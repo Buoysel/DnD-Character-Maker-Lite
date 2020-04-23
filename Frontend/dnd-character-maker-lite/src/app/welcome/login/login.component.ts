@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DnDUser } from '../../model/DnDUser';
 import { UserService } from '../../services/user/user.service';
 import { HttpResponse } from '@angular/common/http';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -50,7 +53,7 @@ export class LoginComponent implements OnInit {
         this.userService.setCurrentUser(resp.body as DnDUser);
         console.log(this.userService.getCurrentUser());
 
-        //this.router.navigate(['/characters']);  -- Route to characters page after successfully logging in.
+        this.router.navigate(['/dashboard']); 
       },
       (error: HttpResponse<DnDUser>) => {
         switch(error.status) {
