@@ -1,4 +1,13 @@
 <div class="row">
+    <div class="col-12">
+        <div class="text-center" style="padding-bottom: 2em;padding-top: 1em;">
+            <button type="button" class="btn btn-warning" style="width: 50%;" (click)="newCharacter()">
+                New Character
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
     <app-character-card *ngFor="let character of characters" [character]="character">
 
     </app-character-card>

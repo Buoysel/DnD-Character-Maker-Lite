@@ -1,6 +1,7 @@
 package com.buoysel_labs.dndmaker.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,20 +42,34 @@ public class CharacterController {
 		
 	}
 	
-	@PostMapping(path="/character", consumes= {"application/json"})
-	public DnDCharacter addCharacter(@RequestBody DnDCharacter dndchar) {
+	@GetMapping(path="/character/all/{uid}")
+	public ResponseEntity<List<DnDCharacter>> getAllCharacters(@PathVariable("uid") int uid) {
 		
-		DnDUser creator = userRepo.findByUserID(dndchar.getCreator());
-		
-		if (creator == null) {
-			return null;
+		try {
+			DnDUser tempCreator = new DnDUser();
+			tempCreator.setUserID(uid);
+			return new ResponseEntity<>(charRepo.findAllByCreator(tempCreator), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
+	}
+	
+	
+	@PostMapping(path="/character/new", consumes= {"application/json"})
+	public ResponseEntity<DnDCharacter> addCharacter(@RequestBody DnDCharacter dndchar) {
 		
-		dndchar.setCreator(creator);
-		dndchar.setDatecreated(new Date());
-		charRepo.save(dndchar);
+		System.out.println("Writing to Database: ");
+		System.out.println(dndchar);
 		
-		return dndchar;
+		try {
+			DnDUser creator = userRepo.findByUserID(dndchar.getCreator());
+			dndchar.setCreator(creator);
+			dndchar.setDatecreated(new Date());
+			return new ResponseEntity(charRepo.save(dndchar), HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity(HttpStatus.CONFLICT);
+		}
 	}
 	
 	@PutMapping(path="/character/{cid}")

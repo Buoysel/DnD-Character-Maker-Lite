@@ -31,7 +31,7 @@ public class DnDUser {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy="creator", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="creator", fetch=FetchType.LAZY)
 	private List<DnDCharacter> characters;
 	
 	public int getUserID() {

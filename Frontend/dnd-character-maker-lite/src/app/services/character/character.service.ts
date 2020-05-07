@@ -20,10 +20,34 @@ export class CharacterService {
 
   }
 
+  /** Post new character on the database */
+  public addNewCharacter(newCharcter): Observable<HttpResponse<DnDCharacter>> {
+    const url = `${this.charUrl}/new`;
+
+    console.log("Hitting URL: " + url);
+    console.log("Sending data: ");
+    console.log(newCharcter);
+
+    return this.http.post<DnDCharacter>(url, newCharcter, {
+      headers: new HttpHeaders({'content-type': 'application/json'}),
+      observe: 'response'
+    });
+  }
+
   /** Get Character by ID */
   public getCharacterById(charID: number): Observable<HttpResponse<DnDCharacter>> {
     const url = `${this.charUrl}/${charID}`;
-    return  this.http.get<DnDCharacter>(url, {observe: 'response'});;
+    return  this.http.get<DnDCharacter>(url, {observe: 'response'});
+  }
+
+  /** Get all of a user's characters */
+  public getAllCharacters(userID: number): Observable<HttpResponse<DnDCharacter[]>> {
+    const url = `${this.charUrl}/all/${userID}`
+    console.log("Retrieving from url: " + url)
+    return this.http.get<DnDCharacter[]>(url, {observe: 'response'})
+      .pipe(
+        tap(resp => console.log)
+      );
   }
 
 

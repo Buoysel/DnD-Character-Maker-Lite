@@ -54,7 +54,8 @@ public class UserController {
 			
 			if (decryptedPassword.equals(upass)) {
 				
-				login.setPassword("");
+				login.setPassword(null);
+				login.setCharacters(null);
 				
 				return new ResponseEntity<>(login, HttpStatus.OK);
 				

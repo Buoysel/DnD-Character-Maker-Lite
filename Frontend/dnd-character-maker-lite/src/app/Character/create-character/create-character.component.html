@@ -1,0 +1,78 @@
+<form [formGroup]="createForm" (ngSubmit)="createCharacter(createForm.value)">
+
+    <h4>Identity</h4>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" formControlName="charName" placeholder="Name">
+        </div>
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" formControlName="charClass" placeholder="Class">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+
+            <h4>Stats</h4>
+
+            <div class="form-group">
+                <input type="text" formControlName="charLevel" placeholder="Level" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charHP" placeholder="HP" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charSTR" placeholder="STR" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charDEX" placeholder="DEX" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charCON" placeholder="CON" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charINT" placeholder="INT" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charWIS" placeholder="WIS" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charCHA" placeholder="CHA" class="form-control">
+            </div>
+
+            
+        </div>
+        <div class="col-md-6">
+
+            <h4>Biography</h4>
+
+            <div class="form-group">
+                <input type="text" formControlName="charRace" placeholder="Race" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charBackground" placeholder="Background" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="charAlignment" placeholder="Alignment" class="form-control">
+            </div>
+            
+        </div>
+
+    </div>
+    
+    <div class="row">
+        <div class="col-12 text-center" style="padding-top: 1em;padding-bottom: 1em;">
+            <small *ngIf="!createForm.valid" class="alert alert-danger" style="width: 50%;" role="alert">
+                {{errorMessage}}
+            </small>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center" style="padding-top: 1em;padding-bottom: 1em;">
+            <button type="submit" class="btn btn-primary" style="width: 45%;">Save</button>
+            <!--[disabled]="!createForm.valid"-->
+        </div>
+    </div>
+
+</form>
