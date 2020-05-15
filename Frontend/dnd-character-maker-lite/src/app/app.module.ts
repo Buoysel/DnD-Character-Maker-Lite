@@ -12,6 +12,7 @@ import { AllCharactersComponent } from './Dashboard/all-characters/all-character
 import { CharacterCardComponent } from './Dashboard/all-characters/character-card/character-card.component';
 import { ViewCharacterComponent } from './Character/view-character/view-character.component';
 import { CreateCharacterComponent } from './Character/create-character/create-character.component';
+import { EditCharacterComponent } from './Character/edit-character/edit-character.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CreateCharacterComponent } from './Character/create-character/create-ch
     AllCharactersComponent,
     CharacterCardComponent,
     ViewCharacterComponent,
-    CreateCharacterComponent
+    CreateCharacterComponent,
+    EditCharacterComponent
   ],
   imports: [
     BrowserModule,

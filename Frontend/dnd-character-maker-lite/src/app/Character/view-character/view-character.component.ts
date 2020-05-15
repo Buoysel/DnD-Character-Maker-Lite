@@ -11,9 +11,7 @@ import { CharacterService } from 'src/app/services/character/character.service';
 })
 export class ViewCharacterComponent implements OnInit {
 
-  //Change the login, so the user doesn't immediately get their list
-  // of characters, until they view the dashboard.
-  private character: DnDCharacter;
+  private character: DnDCharacter = null;
 
   constructor(
     private route: ActivatedRoute,

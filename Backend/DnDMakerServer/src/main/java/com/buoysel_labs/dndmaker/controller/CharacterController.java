@@ -62,8 +62,6 @@ public class CharacterController {
 		System.out.println(dndchar);
 		
 		try {
-			DnDUser creator = userRepo.findByUserID(dndchar.getCreator());
-			dndchar.setCreator(creator);
 			dndchar.setDatecreated(new Date());
 			return new ResponseEntity(charRepo.save(dndchar), HttpStatus.OK);
 
@@ -72,9 +70,13 @@ public class CharacterController {
 		}
 	}
 	
-	@PutMapping(path="/character/{cid}")
-	public DnDCharacter updateChar(@RequestBody DnDCharacter dndchar) {
-		return charRepo.save(dndchar);
+	@PutMapping(path="/character/update/{cid}")
+	public ResponseEntity<DnDCharacter> updateChar(@RequestBody DnDCharacter dndchar) {
+		try {
+			return new ResponseEntity(charRepo.save(dndchar), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity(HttpStatus.CONFLICT);
+		}
 	}
 	
 	

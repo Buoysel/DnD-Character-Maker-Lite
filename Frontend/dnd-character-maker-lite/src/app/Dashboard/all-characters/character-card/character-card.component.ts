@@ -22,4 +22,8 @@ export class CharacterCardComponent implements OnInit {
     this.router.navigate(['/character/view/', this.character.charID]);
   }
 
+  onEdit(character) {
+    this.router.navigate(['/character/edit', this.character.charID]);
+  }
+
 }

@@ -21,14 +21,14 @@ export class CharacterService {
   }
 
   /** Post new character on the database */
-  public addNewCharacter(newCharcter): Observable<HttpResponse<DnDCharacter>> {
+  public addNewCharacter(newCharacter): Observable<HttpResponse<DnDCharacter>> {
     const url = `${this.charUrl}/new`;
 
     console.log("Hitting URL: " + url);
     console.log("Sending data: ");
-    console.log(newCharcter);
+    console.log(newCharacter);
 
-    return this.http.post<DnDCharacter>(url, newCharcter, {
+    return this.http.post<DnDCharacter>(url, newCharacter, {
       headers: new HttpHeaders({'content-type': 'application/json'}),
       observe: 'response'
     });
@@ -42,12 +42,22 @@ export class CharacterService {
 
   /** Get all of a user's characters */
   public getAllCharacters(userID: number): Observable<HttpResponse<DnDCharacter[]>> {
-    const url = `${this.charUrl}/all/${userID}`
-    console.log("Retrieving from url: " + url)
+    const url = `${this.charUrl}/all/${userID}`;
+    console.log("Retrieving from url: " + url);
     return this.http.get<DnDCharacter[]>(url, {observe: 'response'})
       .pipe(
         tap(resp => console.log)
       );
+  }
+
+  /** Update Character data */
+  public updateCharacter(character: DnDCharacter): Observable<HttpResponse<DnDCharacter>> {
+    const url = `${this.charUrl}/update/${character.charID}`;
+    console.log("Sending to url: " + url);
+    return this.http.put<DnDCharacter>(url, character, {
+      headers: new HttpHeaders({'content-type': 'application/json'}),
+      observe: 'response'
+    });
   }
 
 
